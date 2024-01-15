@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -l walltime=10:00:00
+#PBS -l nodes=1:ppn=1
+#PBS -N preprocessing_hdf5
+#PBS -m abe
+
+echo Starting script
+module load pandas
+module load h5py/2.10.0-foss-2020a-Python-3.8.2 
+#module load SciPy-bundle/2020.11-fosscuda-2020b
+#module load h5py/3.1.0-fosscuda-2020b  
+
+
+#echo "Merge WBC data"
+#python $VSC_HOME/final_thesis/preprocessing/real/preprocess.py --data_dir "$VSC_DATA_VO/Newcastle_IFC/LabelFreeCDs/HDF5/WBC/" --output_dir "$VSC_DATA_VO/HDF5/WBC"
+
+
+echo "Merge PBMC data"
+python $VSC_HOME/final_thesis/preprocessing/real/preprocess.py --data_dir "$VSC_DATA_VO/Newcastle_IFC/LabelFreeCDs/HDF5/PBMC/"  --output_dir "$VSC_DATA_VO_USER/HDF5/PBMC"  
+
+

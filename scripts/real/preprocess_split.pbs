@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -l walltime=10:00:00 
+#PBS -N preprocess_split
+#PBS -l mem=200gb
+#PBS -m abe
+
+
+#module load pandas
+#module load imbalanced-learn/0.10.1-foss-2022a 
+
+module load scikit-learn/1.1.2-foss-2022a
+module load matplotlib/3.5.2-foss-2022a
+module load imbalanced-learn/0.10.1-foss-2022a 
+
+
+#python $VSC_HOME/Thesis/preprocessing/preprocessh5_split.py --data_dir "$VSC_DATA_VO_USER/HDF5/PBMC/" --cellnames_file "$VSC_HOME/Thesis1/pbmc_cellnames.txt"
+#python $VSC_HOME/Thesis/preprocessing/real/preprocess_split.py --data_dir "$VSC_SCRATCH_VO_USER/WBC/" --cellnames_file "$VSC_HOME/Thesis/wbc_cellnames.txt"
+
+#python $VSC_HOME/final_thesis/preprocessing/real/preprocess_split.py --data_dir "$VSC_DATA_VO/HDF5/WBC/" 
+python $VSC_HOME/final_thesis/preprocessing/real/preprocess_split.py --data_dir "$VSC_DATA_VO/HDF5/PBMC/" 
+
+#python $VSC_HOME/Thesis/preprocessing/real/preprocess_splitplots1.py --data_dir "$VSC_DATA_VO_USER/HDF5/WBC/" 
+
+

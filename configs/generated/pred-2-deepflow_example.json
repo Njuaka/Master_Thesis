@@ -1,0 +1,12 @@
+{
+    "batch_size": 128,
+    "image_width": 90,
+    "image_height": 90,
+    "channels": [1, 6, 9],
+    "model":"deepflow",
+    "h5_data": "combined.h5",
+    "l2": 0.0005,
+    "noc": 208,
+    "model_hdf5": "/kyukon/home/gent/455/vsc45530/final_thesis/weights/deepflow-wbc-bfdf.h5"
+}
+

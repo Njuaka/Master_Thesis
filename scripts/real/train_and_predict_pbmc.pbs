@@ -1,0 +1,31 @@
+#!/bin/bash
+#PBS -l walltime=72:00:00 
+#PBS -l nodes=1:ppn=quarter,gpus=1
+#PBS -N train_and_predict_pbmc
+#PBS -m abe
+#PBS -l mem=400gb
+#PBS -t 1 
+
+module load TensorFlow/2.5.0-fosscuda-2020b
+module load Keras/2.4.3-fosscuda-2020b-TensorFlow-2.5.0
+module load SciPy-bundle/2020.11-fosscuda-2020b
+module load h5py/3.1.0-fosscuda-2020b  
+#module load comet_ml/1.0.55
+
+pip uninstall --user -y numpy
+
+pip install --user -r Thesis/requirements_hpc.txt  
+
+datapath="$VSC_DATA_VO/HDF5/PBMC"
+runpath="$VSC_DATA_VO/Run/pbmc"
+configpath="$VSC_HOME/final_thesis/configs/generated/pbmc"
+scripthpath="$VSC_HOME/final_thesis/main.py"
+
+
+echo "Start training combined"
+mkdir -p $runpath/combined/
+rm -f $runpath/combined/initial_model_weights.h5
+cp $VSC_HOME/final_thesis/weights/deepflow-wbc-bfdf.h5 $runpath/combined/initial_model_weights.h5     
+python $scripthpath train $configpath/train-2-deepflow_hpc_combined.json -r $runpath/combined/ $datapath
+echo "Start predicting combined"
+python $scripthpath predict $configpath/pred-2-deepflow_hpc_combined.json -r $runpath/combined/ $datapath
